@@ -29,7 +29,13 @@ class samba::server (
   $shares                   = {},
   # SELinux options
   $selinux_enable_home_dirs = false,
-  $selinux_export_all_rw    = false
+  $selinux_export_all_rw    = false,
+  # LDAP options
+  $ldap_suffix              = undef,
+  $ldap_url                 = undef,
+  $ldap_ssl                 = 'off',
+  $ldap_admin_dn            = '',
+  $ldap_admin_dn_pwd        = undef,
 ) inherits ::samba::params {
 
   # Main package and service
@@ -44,6 +50,18 @@ class samba::server (
   file { '/etc/samba/smb.conf':
     require => Package['samba'],
     content => template('samba/smb.conf.erb'),
+  }
+
+  if ($ldap_admin_dn_pwd) {
+    package {'tdb-tools' :
+      ensure => installed,
+    }
+
+    exec{"/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"" :
+      unless  => "/usr/bin/tdbdump ${samba::params::secretstdb} | /bin/grep -e '^data([0-9]\\+) = \"${ldap_admin_dn_pwd}\\\\00\"$'",
+      require => [File['/etc/samba/smb.conf'], Package['tdb-tools']],
+      notify  => Service[$samba::params::service],
+    }
   }
 
   # SELinux options ($::selinux is a fact, so it's a string, not a boolean)

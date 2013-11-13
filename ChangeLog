@@ -1,3 +1,5 @@
+* Fix the selinux conditional, being a fact it's a string not a boolean.
+
 2013-05-24 - 0.1.1
 * Add support for Debian service name (sid3windr).
 * Update README and use markdown.

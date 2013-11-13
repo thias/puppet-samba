@@ -46,8 +46,8 @@ class samba::server (
     content => template('samba/smb.conf.erb'),
   }
 
-  # SELinux options
-  if $::selinux {
+  # SELinux options ($::selinux is a fact, so it's a string, not a boolean)
+  if $::selinux == 'true' {
     Selboolean { persistent => true }
     if $selinux_enable_home_dirs {
       selboolean { 'samba_enable_home_dirs': value => 'on' }

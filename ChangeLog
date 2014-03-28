@@ -1,3 +1,5 @@
+* Add support for LDAP authentication (#1, @Spredzy).
+
 2013-11-18 - 0.1.2
 * Fix the selinux conditional, being a fact it's a string not a boolean.
 * Fix the service name on Ubuntu.

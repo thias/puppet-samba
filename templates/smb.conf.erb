@@ -29,7 +29,7 @@
 	passdb backend = ldapsam:"<%= @ldap_url %>"
 	ldap ssl = <%= @ldap_ssl %>
 	ldap suffix = <%= @ldap_suffix %>
-<% if !@ldap_admin_dn.empty? -%>
+<% if @ldap_admin_dn -%>
 	ldap admin dn = <%= @ldap_admin_dn %>
 <% end -%>
 <% else -%>

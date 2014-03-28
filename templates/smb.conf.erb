@@ -25,7 +25,16 @@
 <% if @map_to_guest -%>
 	map to guest = <%= @map_to_guest %>
 <% end -%>
+<% if @passdb_backend == 'ldapsam' -%>
+	passdb backend = ldapsam:"<%= @ldap_url %>"
+	ldap ssl = <%= @ldap_ssl %>
+	ldap suffix = <%= @ldap_suffix %>
+<% if !@ldap_admin_dn.empty? -%>
+	ldap admin dn = <%= @ldap_admin_dn %>
+<% end -%>
+<% else -%>
 	passdb backend = <%= @passdb_backend %>
+<% end -%>
 <% if @domain_master -%>
 	domain master = yes 
 <% end -%>

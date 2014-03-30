@@ -23,8 +23,7 @@ class samba::params {
         $service = [ 'samba' ]
         $samba_config_path = '/usr/local/etc/smb.conf'
         $package_name = 'samba36'
-      }
-      $secretstdb = '/var/lib/samba/secrets.tdb'
+        $secretstdb = '/var/lib/samba/secrets.tdb'
     }
     default: {
       $service = [ 'samba' ]
@@ -32,4 +31,5 @@ class samba::params {
       $samba_config_path = '/etc/smb.conf'
       $package_name = 'samba'
     }
+  }
 }

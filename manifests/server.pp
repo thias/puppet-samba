@@ -52,7 +52,7 @@ class samba::server (
   }
 
   file { "smb.conf":
-	  path => $samba::params::samba_config_path:
+	  path => $samba::params::samba_config_path,
     require => Package['samba'],
     content => template('samba/smb.conf.erb'),
   }

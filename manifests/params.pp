@@ -32,7 +32,4 @@ class samba::params {
       $samba_config_path = '/etc/smb.conf'
       $package_name = 'samba'
     }
-  }
-
 }
-

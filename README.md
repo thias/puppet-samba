@@ -1,10 +1,16 @@
 # puppet-samba
+# vim: sts=4 ts=4 sw=4 expandtab autoindent
 
 ## Overview
 
 Install, enable and configure a SAMBA Windows share server.
 
 * `samba::server` : Main class to manage a Samba server
+
+## Support OS
+* Freebsd (testing in 10 version)
+* Debian, Ubuntu
+* Redhat, CentOS
 
 ## Example Usage
 

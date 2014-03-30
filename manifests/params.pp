@@ -1,7 +1,11 @@
 # Class: samba::params
 # vim: sts=2 ts=2 sw=2 expandtab autoindent
+# USAGE:
+#   $service == name of service
+#   $secretdb == path on secret database
+#   $samba_config_path == path on smb.conf
+#   $package_name == name of package for install (for Freebsd samba3.6)
 class samba::params {
-
   case $::osfamily {
     'RedHat': {
       $service = [ 'smb', 'nmb' ]

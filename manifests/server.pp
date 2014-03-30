@@ -1,5 +1,5 @@
 # Class: samba::server
-#
+# vim: sts=2 ts=2 sw=2 et autoindent
 # Samba server.
 #
 # For all main options, see the smb.conf(5) and samba(7) man pages.
@@ -39,15 +39,20 @@ class samba::server (
 ) inherits ::samba::params {
 
   # Main package and service
-  package { 'samba': ensure => installed }
+  package { 'samba': 
+    name => $samba::params::package_name, 
+    ensure => installed 
+  }
+
   service { $samba::params::service:
     enable    => true,
     ensure    => running,
     hasstatus => true,
-    subscribe => File['/etc/samba/smb.conf'],
+    subscribe => File['smb.conf'],
   }
 
-  file { '/etc/samba/smb.conf':
+  file { "smb.conf":
+	  path => $samba::params::samba_config_path,
     require => Package['samba'],
     content => template('samba/smb.conf.erb'),
   }

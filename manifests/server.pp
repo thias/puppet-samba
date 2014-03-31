@@ -48,7 +48,7 @@ class samba::server (
   }
 
   file { $::samba::params::config_file:
-    require => Package['samba'],
+    require => Package[$::samba::params::package],
     content => template('samba/smb.conf.erb'),
   }
 

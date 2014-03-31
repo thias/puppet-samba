@@ -6,6 +6,8 @@ class samba::params {
     'RedHat': {
       $service = [ 'smb', 'nmb' ]
       $secretstdb = '/var/lib/samba/private/secrets.tdb'
+      $config_file = '/etc/samba/smb.conf'
+      $package = 'samba'
     }
     'Debian': {
       if $::operatingsystem == 'Ubuntu' {
@@ -14,10 +16,20 @@ class samba::params {
         $service = [ 'samba' ]
       }
       $secretstdb = '/var/lib/samba/secrets.tdb'
+      $config_file = '/etc/samba/smb.conf'
+      $package = 'samba'
+    }
+    'Freebsd': {
+      $service = [ 'samba' ]
+      $secretstdb = '/var/lib/samba/secrets.tdb'
+      $config_file = '/usr/local/etc/smb.conf'
+      $package = 'samba36'
     }
     default: {
       $service = [ 'samba' ]
       $secretstdb = '/usr/local/samba/private/secrets.tdb'
+      $config_file = '/etc/samba/smb.conf'
+      $package = 'samba'
     }
   }
 

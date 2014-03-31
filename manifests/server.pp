@@ -39,15 +39,15 @@ class samba::server (
 ) inherits ::samba::params {
 
   # Main package and service
-  package { 'samba': ensure => installed }
-  service { $samba::params::service:
-    enable    => true,
+  package { $::samba::params::package: ensure => installed }
+  service { $::samba::params::service:
     ensure    => running,
+    enable    => true,
     hasstatus => true,
-    subscribe => File['/etc/samba/smb.conf'],
+    subscribe => File[$::samba::params::config_file],
   }
 
-  file { '/etc/samba/smb.conf':
+  file { $::samba::params::config_file:
     require => Package['samba'],
     content => template('samba/smb.conf.erb'),
   }
@@ -55,10 +55,10 @@ class samba::server (
   if $ldap_admin_dn_pwd {
     package { 'tdb-tools' : ensure => installed }
 
-    exec{ "/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"":
+    exec { "/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"":
       unless  => "/usr/bin/tdbdump ${::samba::params::secretstdb} | /bin/grep -e '^data([0-9]\\+) = \"${ldap_admin_dn_pwd}\\\\00\"$'",
       require => [
-        File['/etc/samba/smb.conf'],
+        File[$::samba::params::config_file],
         Package['tdb-tools'],
       ],
       notify  => Service[$::samba::params::service],

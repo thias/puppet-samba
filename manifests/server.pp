@@ -23,6 +23,7 @@ class samba::server (
   $local_master             = undef,
   $security                 = 'user',
   $map_to_guest             = undef,
+  $guest_account            = undef,
   $os_level                 = undef,
   $preferred_master         = undef,
   $extra_global_options     = [],

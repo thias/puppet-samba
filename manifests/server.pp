@@ -37,6 +37,9 @@ class samba::server (
   $ldap_ssl                 = 'off',
   $ldap_admin_dn            = undef,
   $ldap_admin_dn_pwd        = undef,
+  $ldap_group_suffix        = undef,
+  $ldap_machine_suffix      = undef,
+  $ldap_user_suffix         = undef,
 ) inherits ::samba::params {
 
   # Main package and service

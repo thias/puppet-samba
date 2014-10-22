@@ -6,7 +6,7 @@ class samba::params {
     'RedHat': {
       if $::operatingsystemmajrelease == '5' {
         $service = [ 'smb' ]
-      else
+      } else {
         $service = [ 'smb', 'nmb' ]
       fi
       $secretstdb = '/var/lib/samba/private/secrets.tdb'

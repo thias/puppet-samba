@@ -8,7 +8,7 @@ class samba::params {
         $service = [ 'smb' ]
       } else {
         $service = [ 'smb', 'nmb' ]
-      fi
+      }
       $secretstdb = '/var/lib/samba/private/secrets.tdb'
       $config_file = '/etc/samba/smb.conf'
       $package = 'samba'

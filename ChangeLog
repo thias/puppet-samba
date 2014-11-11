@@ -1,3 +1,5 @@
+* Fix RHEL5/CentOS5 services (no nmb service, #8, @cdenneen).
+
 2014-04-20 - 0.1.4
 * Add guest_account parameter (#4, @chris-hall-hu).
 

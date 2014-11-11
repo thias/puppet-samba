@@ -4,7 +4,11 @@ class samba::params {
 
   case $::osfamily {
     'RedHat': {
-      $service = [ 'smb', 'nmb' ]
+      if $::operatingsystemmajrelease == '5' {
+        $service = [ 'smb' ]
+      } else {
+        $service = [ 'smb', 'nmb' ]
+      }
       $secretstdb = '/var/lib/samba/private/secrets.tdb'
       $config_file = '/etc/samba/smb.conf'
       $package = 'samba'

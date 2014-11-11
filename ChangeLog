@@ -1,4 +1,6 @@
+2014-11-11 - 0.1.5
 * Fix RHEL5/CentOS5 services (no nmb service, #8, @cdenneen).
+* Add some LDAP options (#7, @t0mmyt).
 
 2014-04-20 - 0.1.4
 * Add guest_account parameter (#4, @chris-hall-hu).

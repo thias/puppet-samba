@@ -35,6 +35,15 @@
 <% if @ldap_admin_dn -%>
 	ldap admin dn = <%= @ldap_admin_dn %>
 <% end -%>
+<% if @ldap_user_suffix -%>
+	ldap user suffix = <%= @ldap_user_suffix %>
+<% end -%>
+<% if @ldap_group_suffix -%>
+	ldap group suffix = <%= @ldap_group_suffix %>
+<% end -%>
+<% if @ldap_machine_suffix -%>
+	ldap machine suffix = <%= @ldap_machine_suffix %>
+<% end -%>
 <% else -%>
 	passdb backend = <%= @passdb_backend %>
 <% end -%>

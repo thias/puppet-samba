@@ -59,7 +59,8 @@ class samba::server (
   if $ldap_admin_dn_pwd {
     package { 'tdb-tools' : ensure => installed }
 
-    exec { "/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"":
+    exec { 'samba::server smbpasswd':
+      command => "/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"",
       unless  => "/usr/bin/tdbdump ${::samba::params::secretstdb} | /bin/grep -e '^data([0-9]\\+) = \"${ldap_admin_dn_pwd}\\\\00\"$'",
       require => [
         File[$::samba::params::config_file],

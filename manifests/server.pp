@@ -43,7 +43,7 @@ class samba::server (
 ) inherits ::samba::params {
 
   # Main package and service
-  package { $::samba::params::package: ensure => installed }
+  package { $::samba::params::package: ensure => installed, allow_virtual => false }
   service { $::samba::params::service:
     ensure    => running,
     enable    => true,
@@ -57,7 +57,7 @@ class samba::server (
   }
 
   if $ldap_admin_dn_pwd {
-    package { 'tdb-tools' : ensure => installed }
+    package { 'tdb-tools' : ensure => installed, allow_virtual => false }
 
     exec { "/usr/bin/smbpasswd -w \"${ldap_admin_dn_pwd}\"":
       unless  => "/usr/bin/tdbdump ${::samba::params::secretstdb} | /bin/grep -e '^data([0-9]\\+) = \"${ldap_admin_dn_pwd}\\\\00\"$'",

@@ -40,6 +40,7 @@ class samba::server (
   $ldap_group_suffix        = undef,
   $ldap_machine_suffix      = undef,
   $ldap_user_suffix         = undef,
+  $firewall                 = true,
 ) inherits ::samba::params {
 
   # Main package and service
@@ -79,6 +80,22 @@ class samba::server (
       selboolean { 'samba_export_all_rw': value => 'on' }
     }
   }
+  
+  if $firewall == 'true' {
+    # Firewall management
+    firewall { '100 allow 137, 137, 138, 445 udp access':
+      port   => [137, 137, 138, 445],
+      proto  => udp,
+      action => accept,
+    }
+
+    firewall { '100 allow 135, 137, 139, 445 tcp access':
+      port   => [135, 137, 139, 445],
+      proto  => tcp,
+      action => accept,
+      state => ['NEW'],
+   }
+ }
 
 }
 

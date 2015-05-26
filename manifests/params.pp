@@ -16,10 +16,14 @@ class samba::params {
     'Debian': {
       if $::operatingsystem == 'Ubuntu' {
         $service = [ 'smbd' ]
+        if versioncmp($::lsbdistrelease, '14.04') >= 0 {
+          $secretstdb = '/var/lib/samba/private/secrets.tdb'
+        } else {
+          $secretstdb = '/var/lib/samba/secrets.tdb'
+        }
       } else {
         $service = [ 'samba' ]
       }
-      $secretstdb = '/var/lib/samba/secrets.tdb'
       $config_file = '/etc/samba/smb.conf'
       $package = 'samba'
     }

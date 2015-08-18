@@ -17,7 +17,11 @@ class samba::params {
       if $::operatingsystem == 'Ubuntu' {
         $service = [ 'smbd' ]
       } else {
-        $service = [ 'samba' ]
+        if ($::operatingsystem == 'Debian') and ($::operatingsystemmajrelease >= '8') {
+          $service = [ 'smbd' ]
+        } else {
+          $service = [ 'samba' ]
+        } 
       }
       $secretstdb = '/var/lib/samba/secrets.tdb'
       $config_file = '/etc/samba/smb.conf'

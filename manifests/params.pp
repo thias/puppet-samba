@@ -14,12 +14,16 @@ class samba::params {
       $package = 'samba'
     }
     'Debian': {
-      if $::operatingsystem == 'Ubuntu' {
-        $service = [ 'smbd' ]
-      } else {
+      if $::operatingsystem == 'Debian' and versioncmp($::operatingsystemrelease, '8') < 0 {
         $service = [ 'samba' ]
+      } else {
+        $service = [ 'smbd', 'nmbd' ]
       }
-      $secretstdb = '/var/lib/samba/secrets.tdb'
+      if $::operatingsystem == 'Ubuntu' and versioncmp($::operatingsystemrelease, '14') >= 0 {
+        $secretstdb = '/var/lib/samba/private/secrets.tdb'
+      } else {
+        $secretstdb = '/var/lib/samba/secrets.tdb'
+      }
       $config_file = '/etc/samba/smb.conf'
       $package = 'samba'
     }

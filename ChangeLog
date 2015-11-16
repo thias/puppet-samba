@@ -1,3 +1,6 @@
+* Fix service for Debian 8+ (#14, @tskirvin).
+* Fix secrets.tdb path for Ubuntu 14+ (#15, @amateo).
+
 2014-11-11 - 0.1.5
 * Fix RHEL5/CentOS5 services (no nmb service, #8, @cdenneen).
 * Add some LDAP options (#7, @t0mmyt).

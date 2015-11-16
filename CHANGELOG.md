@@ -1,3 +1,4 @@
+#### 2015-11-16 - 1.0.0
 * Fix service for Debian 8+ (#14, @tskirvin).
 * Fix secrets.tdb path for Ubuntu 14+ (#15, @amateo).
 

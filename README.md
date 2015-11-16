@@ -44,3 +44,38 @@ class { '::samba::server':
 }
 ```
 
+```yaml
+---
+classes:
+  - '::samba::server'
+samba::server::workgroup: 'EXAMPLE'
+samba::server::server_string: 'Example File Server 01'
+samba::server::netbios_name: 'F01'
+samba::server::interfaces:
+  - 'lo'
+  - 'eth0'
+samba::server::hosts_allow:
+  - '127.'
+  - '192.168.'
+samba::server::local_master: 'yes'
+samba::server::map_to_guest: 'Bad User'
+samba::server::os_level: '50'
+samba::server::preferred_master: 'yes'
+samba::server::extra_global_options:
+  - 'printing = BSD'
+  - 'printcap name = /dev/null'
+samba::server::shares:
+  homes:
+    - 'comment = Home Directories'
+    - 'browseable = no'
+    - 'writable = yes'
+  pictures:
+    - 'comment = Pictures'
+    - 'path = /srv/pictures'
+    - 'browseable = yes'
+    - 'writable = yes'
+    - 'guest ok = yes'
+    - 'available = yes'
+samba::server::selinux_enable_home_dirs: true
+```
+

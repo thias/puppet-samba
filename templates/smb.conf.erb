@@ -47,6 +47,15 @@
 <% else -%>
 	passdb backend = <%= @passdb_backend %>
 <% end -%>
+<% if @realm -%>
+  realm = <%= @realm %>
+<% end -%>
+<% if @load_printers -%>
+  Load printers =  <%= @load_printers %>
+<% end -%>
+<% if @printcap -%>
+  printcap = <%= @printcap%>
+<% end -%>
 <% if @domain_master -%>
 	domain master = yes 
 <% end -%>

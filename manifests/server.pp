@@ -31,6 +31,9 @@ class samba::server (
   # SELinux options
   $selinux_enable_home_dirs = false,
   $selinux_export_all_rw    = false,
+  # Default state for service
+  $service_enabled          = 'true',
+  $service_ensure           = 'running',
   # LDAP options
   $ldap_suffix              = undef,
   $ldap_url                 = undef,
@@ -45,8 +48,8 @@ class samba::server (
   # Main package and service
   package { $::samba::params::package: ensure => 'installed' }
   service { $::samba::params::service:
-    ensure    => 'running',
-    enable    => true,
+    ensure    => $service_ensure,
+    enable    => $service_enabled,
     hasstatus => true,
     subscribe => File[$::samba::params::config_file],
   }
